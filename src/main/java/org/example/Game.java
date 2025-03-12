@@ -110,7 +110,7 @@ public class Game {
         }
     }
 
-    public void calculateProfict(int TM, int TX, int TR, Resource r, int n, int exceeding) {
+    public void calculateEffect(int TM, int TX, int TR, Resource r, int n, int exceeding) {
         switch (r.RT.getName()) {
             case "A":
                 r.RU = r.RU + r.RU * r.RT.getRE();
@@ -146,6 +146,12 @@ public class Game {
                 }
                 break;
 
+        }
+
+        public int calculateProfit() {
+            int Tx = this.turns.get(this.output.t).TXt;
+            int Tr = this.turns.get(this.output.t).TRt;
+            return Math.min(this.actualBuildings, Tx) * Tr;
         }
 
 
