@@ -31,8 +31,22 @@ public class Game {
                     continue;
                 }
                 if (i < this.R) {
-
-
+                    Resource r = new Resource();
+                    r.RI = values[0];
+                    r.RA = Integer.parseInt(values[1]);
+                    r.RP = Integer.parseInt(values[2]);
+                    r.RW = Integer.parseInt(values[3]);
+                    r.RM = Integer.parseInt(values[4]);
+                    r.RL = Integer.parseInt(values[5]);
+                    r.RU = Integer.parseInt(values[6]);
+                    String specialEffectType = values[7];
+                    if (specialEffectType.equals("X")) r.RT = SpecialEffectType.X;
+                    else {
+                        SpecialEffectType s = SpecialEffectType.valueOf(specialEffectType);
+                        s.setRE(Integer.parseInt(values[8]));
+                        r.RT = s;
+                    }
+                    this.resources.add(r);
                     i++;
                     continue;
                 }

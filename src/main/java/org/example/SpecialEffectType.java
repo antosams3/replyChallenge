@@ -6,11 +6,6 @@ public enum SpecialEffectType {
     public int RE;
     public final String name;
 
-    SpecialEffectType(String name, int RE) {
-        this.name = name;
-        this.RE = RE;
-    }
-
     SpecialEffectType(String name) {
         this.name = name;
     }
@@ -21,6 +16,10 @@ public enum SpecialEffectType {
 
     public String getName() {
         return name;
+    }
+
+    public void setRE(int RE) {
+        this.RE = RE;
     }
 
 }
