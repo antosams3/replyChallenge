@@ -92,7 +92,7 @@ public class Game {
         for(int i=0; i<this.actualResources.size(); i++){
             //La risorsa non è utilizzabile per ora
             if(this.actualResources.get(i).RW == 0){
-                //controllo se è scaduto il tempo di down
+                this.actualResources.get(i).RM -= 1;
                 if(this.actualResources.get(i).RM == 0){
                     //reset
                     this.actualResources.set (i, this.resetResource(this.actualResources.get(i).RI));
@@ -100,10 +100,6 @@ public class Game {
                     if(this.actualResources.get(i).RL == 0){
                         this.actualResources.remove(i);
                     }
-                }
-                //decremento il tempo di down
-                else{
-                    this.actualResources.get(i).RM -= 1;
                 }
             }
             //La risorsa è ancora utilizzabile
