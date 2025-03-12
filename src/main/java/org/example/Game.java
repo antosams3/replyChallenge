@@ -67,8 +67,15 @@ public class Game {
         }
     }
 
-    public void calculateCosts(){
-
+    //calcola il costo di mantenimento
+    public int calculateCosts(){
+        int cost = 0;
+        for (int i = 0; i < this.actualResources.size(); i++) {
+            if(this.actualResources.get(i).RW >0){
+                cost += this.actualResources.get(i).RP;
+            }
+        }
+        return cost;
     }
 
     public Resource resetResource(String id){
@@ -89,6 +96,10 @@ public class Game {
                 if(this.actualResources.get(i).RM == 0){
                     //reset
                     this.actualResources.set (i, this.resetResource(this.actualResources.get(i).RI));
+                    this.actualResources.get(i).RL -= 1;
+                    if(this.actualResources.get(i).RL == 0){
+                        this.actualResources.remove(i);
+                    }
                 }
                 //decremento il tempo di down
                 else{
