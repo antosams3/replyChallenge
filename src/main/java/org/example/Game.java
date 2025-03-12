@@ -72,7 +72,14 @@ public class Game {
     }
 
     public Resource resetResource(String id){
-        
+        Resource resource = new Resource();
+        for (int i = 0; i < this.R; i++) {
+            if(this.resources.get(i).RI.equals(id)){
+                resource = this.resources.get(i);
+                break;
+            }
+        }
+        return resource;
     }
     public void decreaseActivationTurn(){
         for(int i=0; i<this.actualResources.size(); i++){
@@ -82,14 +89,13 @@ public class Game {
                 if(this.actualResources.get(i).RM == 0){
                     //reset
                     this.actualResources.set (i, this.resetResource(this.actualResources.get(i).RI));
-
                 }
                 //decremento il tempo di down
                 else{
                     this.actualResources.get(i).RM -= 1;
                 }
             }
-            
+            //La risorsa è ancora utilizzabile
             else {
                 this.actualResources.get(i).RW -=1;
             }
