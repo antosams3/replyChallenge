@@ -14,6 +14,7 @@ public class Game {
     public List<Turn> turns;
     public List<Resource> actualResources;
     public int actualBuildings = 0;
+    public Output output = new Output(); 
 
 
     public Game(String path) {
@@ -107,6 +108,12 @@ public class Game {
                 this.actualResources.get(i).RW -=1;
             }
         }
+    }
+
+    public int calculateProfit(){
+        int Tx = this.turns.get(this.output.t).TXt;
+        int Tr = this.turns.get(this.output.t).TRt;
+        return Math.min(this.actualBuildings, Tx) * Tr;
     }
 
 
