@@ -32,6 +32,7 @@ public class Game {
                 }
                 if (i < this.R) {
 
+
                     i++;
                     continue;
                 }
