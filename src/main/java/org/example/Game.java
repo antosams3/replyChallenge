@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    public float D;
+    public int D;
     public int R;
     public int T;
     public List<Resource> resources;
     public List<Turn> turns;
+    public List<Resource> actualResources;
+    public int actualBuildings = 0;
+
 
     public Game(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -24,7 +27,7 @@ public class Game {
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(" ");
                 if (first) {
-                    this.D = Float.parseFloat(values[0]);
+                    this.D = Integer.parseInt(values[0]);
                     this.R = Integer.parseInt(values[1]);
                     this.T = Integer.parseInt(values[2]);
                     first = false;
@@ -40,7 +43,7 @@ public class Game {
                     Turn t = new Turn();
                     t.TMt = Integer.parseInt(values[0]);
                     t.TXt = Integer.parseInt(values[1]);
-                    t.TRt = Float.parseFloat(values[2]);
+                    t.TRt = Integer.parseInt(values[2]);
                     this.turns.add(t);
                     j++;
                 }
@@ -49,4 +52,35 @@ public class Game {
             e.printStackTrace();
         }
     }
+
+    public void calculateCosts(){
+
+    }
+
+    public Resource resetResource(String id){
+        
+    }
+    public void decreaseActivationTurn(){
+        for(int i=0; i<this.actualResources.size(); i++){
+            //La risorsa non è utilizzabile per ora
+            if(this.actualResources.get(i).RW == 0){
+                //controllo se è scaduto il tempo di down
+                if(this.actualResources.get(i).RM == 0){
+                    //reset
+                    this.actualResources.set (i, this.resetResource(this.actualResources.get(i).RI));
+
+                }
+                //decremento il tempo di down
+                else{
+                    this.actualResources.get(i).RM -= 1;
+                }
+            }
+            
+            else {
+                this.actualResources.get(i).RW -=1;
+            }
+        }
+    }
+
+
 }
