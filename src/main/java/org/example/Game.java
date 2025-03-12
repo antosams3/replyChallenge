@@ -90,24 +90,32 @@ public class Game {
         return resource;
     }
     public void decreaseActivationTurn(){
+    	List<Resource> expiredResources = new ArrayList<>();
         for(int i=0; i<this.actualResources.size(); i++){
-            //La risorsa non è utilizzabile per ora
-            if(this.actualResources.get(i).RW == 0){
-                this.actualResources.get(i).RM -= 1;
-                if(this.actualResources.get(i).RM == 0){
-                    //reset
-                    this.actualResources.set (i, this.resetResource(this.actualResources.get(i).RI));
-                    this.actualResources.get(i).RL -= 1;
-                    if(this.actualResources.get(i).RL == 0){
-                        this.actualResources.remove(i);
+            this.actualResources.get(i).RL -= 1;
+                    
+            if(this.actualResources.get(i).RL == 0){
+            	expiredResources.add(this.actualResources.get(i));
+            }
+            else {
+                
+            	//La risorsa non è utilizzabile per ora
+                if(this.actualResources.get(i).RW == 0){
+                    this.actualResources.get(i).RM -= 1;
+                    if(this.actualResources.get(i).RM == 0){
+                        //reset
+                        this.actualResources.set (i, this.resetResource(this.actualResources.get(i).RI));
+                        
                     }
                 }
-            }
-            //La risorsa è ancora utilizzabile
-            else {
-                this.actualResources.get(i).RW -=1;
+                //La risorsa è ancora utilizzabile
+                else {
+                    this.actualResources.get(i).RW -=1;
+                }
             }
         }
+        
+        this.actualResources.removeAll(expiredResources);
     }
 
     public int calculateProfit(){
