@@ -118,11 +118,49 @@ public class Game {
         this.actualResources.removeAll(expiredResources);
     }
 
-    public int calculateProfit(){
+    public void calculateEffect(int TM, int TX, int TR, Resource r, int n, int exceeding) {
+        switch (r.RT.getName()) {
+            case "A":
+                r.RU = r.RU + r.RU * r.RT.getRE();
+                if (r.RU < 0) {
+                    r.RU = 0;
+                }
+                break;
+            case "B":
+                TM = TM + TM * r.RT.getRE();
+                TX = TX + TX * r.RT.getRE();
+
+                if (TM < 0) {
+                    TM = 0;
+                }
+
+                if (TX < 0) {
+                    TX = 0;
+                }
+
+                break;
+            case "C":
+                r.RL = r.RL + r.RL * r.RT.getRE();
+                break;
+            case "D":
+                TR = TR + TR * r.RT.getRE();
+                if (TR < 0) {
+                    TR = 0;
+                }
+            case "E":
+                if (n > TX) {
+                    exceeding = n - TX;
+                    n = TX;
+                }
+                break;
+
+        }
+
+    }
+
+    public int calculateProfit() {
         int Tx = this.turns.get(this.output.t).TXt;
         int Tr = this.turns.get(this.output.t).TRt;
         return Math.min(this.actualBuildings, Tx) * Tr;
     }
-
-
 }
