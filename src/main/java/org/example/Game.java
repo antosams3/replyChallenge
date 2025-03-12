@@ -110,24 +110,23 @@ public class Game {
         }
     }
 
-<<<<<<< HEAD
-    public void doEffect(int TM, int TX, int TR, Resource r, int n, int exceeding){
-        switch(r.RT.getName()){
+    public void calculateProfict(int TM, int TX, int TR, Resource r, int n, int exceeding) {
+        switch (r.RT.getName()) {
             case "A":
                 r.RU = r.RU + r.RU * r.RT.getRE();
-                if(r.RU < 0) {
+                if (r.RU < 0) {
                     r.RU = 0;
                 }
-            break;
+                break;
             case "B":
                 TM = TM + TM * r.RT.getRE();
                 TX = TX + TX * r.RT.getRE();
 
-                if(TM < 0){
+                if (TM < 0) {
                     TM = 0;
                 }
 
-                if(TX < 0){
+                if (TX < 0) {
                     TX = 0;
                 }
 
@@ -137,24 +136,18 @@ public class Game {
                 break;
             case "D":
                 TR = TR + TR * r.RT.getRE();
-                if (TR < 0){
+                if (TR < 0) {
                     TR = 0;
                 }
             case "E":
-                if (n > TX){
+                if (n > TX) {
                     exceeding = n - TX;
                     n = TX;
                 }
                 break;
 
         }
-=======
-    public int calculateProfit(){
-        int Tx = this.turns.get(this.output.t).TXt;
-        int Tr = this.turns.get(this.output.t).TRt;
-        return Math.min(this.actualBuildings, Tx) * Tr;
->>>>>>> cb8502e7815a1319afcc07ce52b3a843cf63161d
+
+
     }
-
-
 }
