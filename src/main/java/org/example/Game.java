@@ -148,12 +148,11 @@ public class Game {
 
         }
 
-        public int calculateProfit() {
-            int Tx = this.turns.get(this.output.t).TXt;
-            int Tr = this.turns.get(this.output.t).TRt;
-            return Math.min(this.actualBuildings, Tx) * Tr;
-        }
+    }
 
-
+    public int calculateProfit() {
+        int Tx = this.turns.get(this.output.t).TXt;
+        int Tr = this.turns.get(this.output.t).TRt;
+        return Math.min(this.actualBuildings, Tx) * Tr;
     }
 }
