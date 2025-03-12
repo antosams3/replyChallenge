@@ -14,6 +14,7 @@ public class Game {
     public List<Turn> turns;
     public List<Resource> actualResources;
     public int actualBuildings = 0;
+    public Output output = new Output(); 
 
 
     public Game(String path) {
@@ -67,35 +68,49 @@ public class Game {
         }
     }
 
-    public void calculateCosts(){
-
+    //calcola il costo di mantenimento
+    public int calculateCosts(){
+        int cost = 0;
+        for (int i = 0; i < this.actualResources.size(); i++) {
+            if(this.actualResources.get(i).RW >0){
+                cost += this.actualResources.get(i).RP;
+            }
+        }
+        return cost;
     }
 
     public Resource resetResource(String id){
-        
+        Resource resource = new Resource();
+        for (int i = 0; i < this.R; i++) {
+            if(this.resources.get(i).RI.equals(id)){
+                resource = this.resources.get(i);
+                break;
+            }
+        }
+        return resource;
     }
     public void decreaseActivationTurn(){
         for(int i=0; i<this.actualResources.size(); i++){
             //La risorsa non è utilizzabile per ora
             if(this.actualResources.get(i).RW == 0){
-                //controllo se è scaduto il tempo di down
+                this.actualResources.get(i).RM -= 1;
                 if(this.actualResources.get(i).RM == 0){
                     //reset
                     this.actualResources.set (i, this.resetResource(this.actualResources.get(i).RI));
-
-                }
-                //decremento il tempo di down
-                else{
-                    this.actualResources.get(i).RM -= 1;
+                    this.actualResources.get(i).RL -= 1;
+                    if(this.actualResources.get(i).RL == 0){
+                        this.actualResources.remove(i);
+                    }
                 }
             }
-            
+            //La risorsa è ancora utilizzabile
             else {
                 this.actualResources.get(i).RW -=1;
             }
         }
     }
 
+<<<<<<< HEAD
     public void doEffect(int TM, int TX, int TR, Resource r, int n, int exceeding){
         switch(r.RT.getName()){
             case "A":
@@ -133,6 +148,12 @@ public class Game {
                 break;
 
         }
+=======
+    public int calculateProfit(){
+        int Tx = this.turns.get(this.output.t).TXt;
+        int Tr = this.turns.get(this.output.t).TRt;
+        return Math.min(this.actualBuildings, Tx) * Tr;
+>>>>>>> cb8502e7815a1319afcc07ce52b3a843cf63161d
     }
 
 
