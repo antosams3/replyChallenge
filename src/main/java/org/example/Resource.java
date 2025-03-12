@@ -10,6 +10,8 @@ public class Resource {
     public int RU; // number of buildings the resource can power in each active turn
     public SpecialEffectType RT;
 
+    public Resource() {};
+
     public Resource(String RI, int RA, int RP, int RW, int RM, int RL, int RU, SpecialEffectType RT) {
         this.RI = RI;
         this.RA = RA;
